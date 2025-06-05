@@ -28,7 +28,7 @@ async def main():
             agent = create_react_agent(llm, tools)
 
             result = await agent.ainvoke({
-                "messages": [HumanMessage(content="What is the sum of 2 and 3?")]
+                "messages": [HumanMessage(content="What is the sum of 54 + 10 * 2?")]
             })
             print("OPENAI_API_KEY", os.getenv("OPENAI_API_KEY"))
             print("Result:", result["messages"][-1].content)
