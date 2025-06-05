@@ -17,7 +17,7 @@ async def main():
     print("Hello from mcp-langchain! ")
     
     # Initialize the LLM after environment variables are loaded
-    llm = ChatOpenAI()
+    llm = ChatOpenAI(api_key=os.getenv("OPENAI_API_KEY2"))
     
     async with stdio_client(stdio_server_params) as (read, write):
         async with ClientSession(read_stream=read, write_stream=write) as session:
@@ -27,13 +27,11 @@ async def main():
             #print("Tools:", tools)
             agent = create_react_agent(llm, tools)
 
-            result = await agent.invoke(
-                HumanMessage(
-                    content="What is the sum of 2 and 3?"
-                )
-            )
+            result = await agent.ainvoke({
+                "messages": [HumanMessage(content="What is the sum of 2 and 3?")]
+            })
             print("OPENAI_API_KEY", os.getenv("OPENAI_API_KEY"))
-            print("Result:", result.messages[-1].content)
+            print("Result:", result["messages"][-1].content)
      
 
 
