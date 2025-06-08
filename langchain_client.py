@@ -22,7 +22,7 @@ async def main():
         "weather": {
             # make sure you start your weather server on port 8000
             "url": "http://localhost:8000/mcp",
-            "transport": "streamable-http",
+            "transport": "streamable_http",
         }
     }
     )
